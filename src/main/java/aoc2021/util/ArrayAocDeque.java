@@ -6,6 +6,10 @@ import java.util.List;
 
 public class ArrayAocDeque<T> extends ArrayDeque<T> implements AocDeque<T> {
 
+    public ArrayAocDeque(List<T> input) {
+        super(input);
+    }
+
     @Override
     public T take() {
         return poll();
