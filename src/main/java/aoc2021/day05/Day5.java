@@ -17,6 +17,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static aoc2021.util.Util.toInts;
+
 public class Day5 {
 
     public static void solveA() throws IOException, URISyntaxException {
@@ -101,9 +103,9 @@ public class Day5 {
 
     private static Line parse(String line) {
         String[] parts = line.split("->");
-        String[] one = parts[0].split(",");
-        String[] two = parts[1].split(",");
-        return new Line(Integer.parseInt(one[0].trim()), Integer.parseInt(one[1].trim()), Integer.parseInt(two[0].trim()), Integer.parseInt(two[1].trim()));
+        int[] one = toInts(parts[0].split(","));
+        int[] two = toInts(parts[1].split(","));
+        return new Line(one[0], one[1], two[0], two[1]);
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {

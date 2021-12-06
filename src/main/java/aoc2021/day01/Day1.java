@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static aoc2021.util.Util.toInts;
+
 public class Day1 {
 
     public static void solveGog() {
@@ -19,10 +21,7 @@ public class Day1 {
     public static void solveA() throws IOException, URISyntaxException {
         URI uri = Objects.requireNonNull(Day1.class.getResource("/day01/input.txt")).toURI();
         List<String> lines = Files.readAllLines(Paths.get(uri), Charset.defaultCharset());
-        List<Integer> ints = new ArrayList<>();
-        for (String line : lines) {
-            ints.add(Integer.parseInt(line));
-        }
+        List<Integer> ints = toInts(lines);
         int incs = 0;
         int last = ints.get(0);
         for (Integer i : ints) {
@@ -37,10 +36,7 @@ public class Day1 {
     public static void solveB() throws IOException, URISyntaxException {
         URI uri = Objects.requireNonNull(Day1.class.getResource("/day01/input.txt")).toURI();
         List<String> lines = Files.readAllLines(Paths.get(uri), Charset.defaultCharset());
-        List<Integer> ints = new ArrayList<>();
-        for (String line : lines) {
-            ints.add(Integer.parseInt(line));
-        }
+        List<Integer> ints = toInts(lines);
         int incs = 0;
         int slidingSum = ints.get(0) + ints.get(1) + ints.get(2);
         int last = slidingSum;

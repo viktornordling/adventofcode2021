@@ -1,6 +1,9 @@
 package aoc2021.util;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Util {
@@ -22,5 +25,48 @@ public class Util {
             }
             System.out.println();
         }
+    }
+
+    public static String charsToString(List<Character> str) {
+        StringBuilder sb = new StringBuilder();
+
+        // Appends characters one by one
+        for (Character ch : str) {
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+
+    public static int[] toInts(String[] strings) {
+        int[] result = new int[strings.length];
+        for (int i = 0; i < strings.length; i++) {
+            result[i] = Integer.parseInt(strings[i].trim());
+        }
+        return result;
+    }
+
+    public static List<Integer> toInts(List<String> lines) {
+        List<Integer> result = new ArrayList<>();
+        for (String line : lines) {
+            result.add(Integer.parseInt(line));
+        }
+        return result;
+    }
+
+    public static List<Integer> toInts(String line) {
+        List<Integer> result = new ArrayList<>();
+        String[] parts = line.split(",");
+        for (String part : parts) {
+            result.add(Integer.parseInt(part.trim()));
+        }
+        return result;
+    }
+
+    public static Map<Integer, Long> freq(List<Integer> nums) {
+        Map<Integer, Long> result = new HashMap<>();
+        for (Integer integer : nums) {
+            result.put(integer, result.getOrDefault(integer, 0L) + 1);
+        }
+        return result;
     }
 }

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static aoc2021.util.Util.charsToString;
+
 public class Day3 {
 
     public static void solveA() throws IOException, URISyntaxException {
@@ -49,8 +51,8 @@ public class Day3 {
                 epsilonBits.add('0');
             }
         }
-        int gamma = Integer.parseInt(cToString(gammaBits), 2);
-        int epsilon = Integer.parseInt(cToString(epsilonBits), 2);
+        int gamma = Integer.parseInt(charsToString(gammaBits), 2);
+        int epsilon = Integer.parseInt(charsToString(epsilonBits), 2);
         System.out.println(gamma * epsilon);
     }
 
@@ -85,7 +87,7 @@ public class Day3 {
             }
             index++;
         }
-        return Integer.parseInt(cToString(copy.get(0)), 2);
+        return Integer.parseInt(charsToString(copy.get(0)), 2);
     }
 
     private static int findScrubberRating(List<List<Character>> bits) {
@@ -102,17 +104,7 @@ public class Day3 {
             }
             index++;
         }
-        return Integer.parseInt(cToString(copy.get(0)), 2);
-    }
-
-    public static String cToString(List<Character> str) {
-        StringBuilder sb = new StringBuilder();
-
-        // Appends characters one by one
-        for (Character ch : str) {
-            sb.append(ch);
-        }
-        return sb.toString();
+        return Integer.parseInt(charsToString(copy.get(0)), 2);
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
