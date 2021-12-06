@@ -1,7 +1,8 @@
 package aoc2021.day04;
 
 import aoc2021.day02.Day2;
-import com.google.common.collect.Lists;
+import aoc2021.util.Queue;
+import aoc2021.util.ArrayQueue;
 
 import java.io.IOException;
 import java.net.URI;
@@ -73,14 +74,15 @@ public class Day4 {
 
     public static void solveA() throws IOException, URISyntaxException {
         URI uri = Objects.requireNonNull(Day2.class.getResource("/day04/input.txt")).toURI();
-        List<String> lines = Files.readAllLines(Paths.get(uri), Charset.defaultCharset());
-        String first = lines.get(0);
+        List<String> input = Files.readAllLines(Paths.get(uri), Charset.defaultCharset());
+        Queue<String> lines = new ArrayQueue<>(input);
+        String first = lines.take();
+        lines.take();
         List<Integer> numbers = Arrays.stream(first.split(",")).map(Integer::parseInt).collect(Collectors.toList());
 
         List<BingoBoard> allBoards = new ArrayList<>();
-        List<List<String>> partitions = Lists.partition(lines.subList(1, lines.size()).stream().filter(s -> !s.trim().equals("")).collect(Collectors.toList()), 5);
-        for (int i = 0; i < partitions.size(); i++) {
-            List<String> board = partitions.get(i);
+        while (!lines.isEmpty()) {
+            List<String> board = lines.take(5);
             BingoBoard bboard = new BingoBoard();
             for (int j = 0; j < board.size(); j++) {
                 List<Integer> nums = Arrays.stream(board.get(j).split(" ")).filter(s -> !s.trim().equals("")).map(Integer::parseInt).collect(Collectors.toList());
@@ -94,7 +96,8 @@ public class Day4 {
             for (BingoBoard board : allBoards) {
                 board.set(number);
                 if (board.hasBingo()) {
-                    System.out.println("Bingo! " + board.calc() * number);
+                    System.out.println(board.calc() * number);
+                    return;
                 }
             }
         }
@@ -102,14 +105,15 @@ public class Day4 {
 
     public static void solveB() throws IOException, URISyntaxException {
         URI uri = Objects.requireNonNull(Day2.class.getResource("/day04/input.txt")).toURI();
-        List<String> lines = Files.readAllLines(Paths.get(uri), Charset.defaultCharset());
-        String first = lines.get(0);
+        List<String> input = Files.readAllLines(Paths.get(uri), Charset.defaultCharset());
+        Queue<String> lines = new ArrayQueue<>(input);
+        String first = lines.take();
+        lines.take();
         List<Integer> numbers = Arrays.stream(first.split(",")).map(Integer::parseInt).collect(Collectors.toList());
 
         List<BingoBoard> allBoards = new ArrayList<>();
-        List<List<String>> partitions = Lists.partition(lines.subList(1, lines.size()).stream().filter(s -> !s.trim().equals("")).collect(Collectors.toList()), 5);
-        for (int i = 0; i < partitions.size(); i++) {
-            List<String> board = partitions.get(i);
+        while (!lines.isEmpty()) {
+            List<String> board = lines.take(5);
             BingoBoard bboard = new BingoBoard();
             for (int j = 0; j < board.size(); j++) {
                 List<Integer> nums = Arrays.stream(board.get(j).split(" ")).filter(s -> !s.trim().equals("")).map(Integer::parseInt).collect(Collectors.toList());
@@ -124,13 +128,13 @@ public class Day4 {
                 board.set(number);
             }
             if (allBoards.size() == 1 && allBoards.get(0).hasBingo()) {
-                System.out.println("Bingo! " + allBoards.get(0).calc() * number);
+                System.out.println(allBoards.get(0).calc() * number);
             }
             allBoards = allBoards.stream().filter(bingoBoard -> !bingoBoard.hasBingo()).collect(Collectors.toList());
         }
     }
     public static void main(String[] args) throws IOException, URISyntaxException {
-//        solveA();
+        solveA();
         solveB();
     }
 }

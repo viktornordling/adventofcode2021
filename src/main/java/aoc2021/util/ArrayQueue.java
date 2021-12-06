@@ -4,9 +4,9 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayAocDeque<T> extends ArrayDeque<T> implements AocDeque<T> {
+public class ArrayQueue<T> extends ArrayDeque<T> implements Queue<T> {
 
-    public ArrayAocDeque(List<T> input) {
+    public ArrayQueue(List<T> input) {
         super(input);
     }
 

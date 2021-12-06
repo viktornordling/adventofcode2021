@@ -3,7 +3,7 @@ package aoc2021.util;
 import java.util.Deque;
 import java.util.List;
 
-public interface AocDeque<T> extends Deque<T> {
+public interface Queue<T> extends Deque<T> {
 
     /**
      * Takes one element from the queue.

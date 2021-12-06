@@ -1,8 +1,8 @@
 package aoc2021.day06;
 
 import aoc2021.day02.Day2;
-import aoc2021.util.AocDeque;
-import aoc2021.util.ArrayAocDeque;
+import aoc2021.util.Queue;
+import aoc2021.util.ArrayQueue;
 
 import java.io.IOException;
 import java.net.URI;
@@ -25,7 +25,7 @@ public class Day6 {
     }
 
     public static void solveA(List<String> input){
-        AocDeque<String> lines = new ArrayAocDeque<>(input);
+        Queue<String> lines = new ArrayQueue<>(input);
         List<Thing> things = new ArrayList<>();
         while (!lines.isEmpty()) {
             things.add(parse(lines.take()));
