@@ -3,12 +3,12 @@ package aoc2021.util;
 import java.util.Objects;
 
 public class Point {
-    int x1;
-    int y1;
+    int x;
+    int y;
 
     public Point(int x1, int y1) {
-        this.x1 = x1;
-        this.y1 = y1;
+        this.x = x1;
+        this.y = y1;
     }
 
     @Override
@@ -16,11 +16,11 @@ public class Point {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
-        return x1 == point.x1 && y1 == point.y1;
+        return x == point.x && y == point.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x1, y1);
+        return Objects.hash(x, y);
     }
 }

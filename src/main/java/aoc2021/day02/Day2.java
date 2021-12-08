@@ -28,7 +28,6 @@ public class Day2 {
                 hor += size;
             }
         }
-        System.out.println("depth = " + depth + " hor = " + hor);
         System.out.println(hor * depth);
     }
 
@@ -42,25 +41,19 @@ public class Day2 {
             String[] parts = line.split(" ");
             int size = Integer.parseInt(parts[1]);
             if (parts[0].equals("down")) {
-//                depth += size;
                 aim += size;
             } else if (parts[0].equals("up")) {
-//                depth -= size;
                 aim -= size;
             } else if (parts[0].equals("forward")) {
                 hor += size;
                 depth += aim * size;
             }
-            System.out.println("depth = " + depth + " hor = " + hor + " aim = " + aim);
         }
-        System.out.println("depth = " + depth + " hor = " + hor);
         System.out.println(hor * depth);
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        long start = System.currentTimeMillis();
-//        solveA();
+        solveA();
         solveB();
-//        System.out.println(System.currentTimeMillis() - start);
     }
 }

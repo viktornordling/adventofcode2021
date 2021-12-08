@@ -9,10 +9,10 @@ import java.util.Map;
 public class Util {
 
     public static void printGrid(Map<Point, Integer> points) {
-        int minX = points.keySet().stream().min(Comparator.comparingInt(o -> o.x1)).get().x1;
-        int maxX = points.keySet().stream().max(Comparator.comparingInt(o -> o.x1)).get().x1;
-        int minY = points.keySet().stream().min(Comparator.comparingInt(o -> o.y1)).get().y1;
-        int maxY = points.keySet().stream().max(Comparator.comparingInt(o -> o.y1)).get().y1;
+        int minX = points.keySet().stream().min(Comparator.comparingInt(o -> o.x)).get().x;
+        int maxX = points.keySet().stream().max(Comparator.comparingInt(o -> o.x)).get().x;
+        int minY = points.keySet().stream().min(Comparator.comparingInt(o -> o.y)).get().y;
+        int maxY = points.keySet().stream().max(Comparator.comparingInt(o -> o.y)).get().y;
 
         for (int y = minY; y <= maxY; y++) {
             for (int x = minX; x <= maxX; x++) {
@@ -29,8 +29,6 @@ public class Util {
 
     public static String charsToString(List<Character> str) {
         StringBuilder sb = new StringBuilder();
-
-        // Appends characters one by one
         for (Character ch : str) {
             sb.append(ch);
         }
