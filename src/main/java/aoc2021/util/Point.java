@@ -3,8 +3,8 @@ package aoc2021.util;
 import java.util.Objects;
 
 public class Point {
-    int x;
-    int y;
+    public int x;
+    public int y;
 
     public Point(int x1, int y1) {
         this.x = x1;

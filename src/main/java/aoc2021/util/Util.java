@@ -1,10 +1,12 @@
 package aoc2021.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Util {
 
@@ -66,5 +68,18 @@ public class Util {
             result.put(integer, result.getOrDefault(integer, 0L) + 1);
         }
         return result;
+    }
+
+    public static String sortString(String inputString) {
+        char[] tempArray = inputString.toCharArray();
+        Arrays.sort(tempArray);
+        return new String(tempArray);
+    }
+
+    public static <T> T onlyElement(Set<T> set) {
+        if (set.size() != 1) {
+            throw new IllegalArgumentException("Size not 1: " + set.size());
+        }
+        return set.stream().findFirst().get();
     }
 }

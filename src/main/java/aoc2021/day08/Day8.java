@@ -1,9 +1,7 @@
 package aoc2021.day08;
 
 import aoc2021.day02.Day2;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.IOException;
 import java.net.URI;
@@ -13,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -22,8 +19,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static aoc2021.day07.Day7.solveB;
-import static aoc2021.util.Util.freq;
+import static aoc2021.util.Util.onlyElement;
+import static aoc2021.util.Util.sortString;
 import static aoc2021.util.Util.toInts;
 
 public class Day8 {
@@ -52,10 +49,10 @@ public class Day8 {
                 set.add(part);
                 countToString.put(part.length(), set);
             }
-            String one = countToString.get(2).stream().findFirst().get();
-            String four = countToString.get(4).stream().findFirst().get();
-            String seven = countToString.get(3).stream().findFirst().get();
-            String eight = countToString.get(7).stream().findFirst().get();
+            String one = onlyElement(countToString.get(2));
+            String four = onlyElement(countToString.get(4));
+            String seven = onlyElement(countToString.get(3));
+            String eight = onlyElement(countToString.get(7));
             String five = findFive(countToString.get(5), one, four);
             String two = findTwo(countToString.get(5), one, four);
             String three = findThree(countToString.get(5), one, four);
@@ -81,27 +78,15 @@ public class Day8 {
                 String sorted = sortString(rightPart);
                 num += stringToInt.get(sorted);
             }
-//            System.out.println(num);
             sum += Integer.parseInt(num);
         }
         System.out.println(sum);
     }
 
-    public static String sortString(String inputString) {
-        // Converting input string to character array
-        char[] tempArray = inputString.toCharArray();
-
-        // Sorting temp array using
-        Arrays.sort(tempArray);
-
-        // Returning new sorted string
-        return new String(tempArray);
-    }
-
     private static String findZero(Set<String> strings, String six, String nine) {
         strings.remove(six);
         strings.remove(nine);
-        return strings.stream().findFirst().get();
+        return onlyElement(strings);
     }
 
     private static String findNine(Set<String> strings, String five, String four) {
@@ -113,7 +98,7 @@ public class Day8 {
                 return string;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Could find number!");
     }
 
     private static String findSix(Set<String> strings, String five, String four) {
@@ -125,7 +110,7 @@ public class Day8 {
                 return string;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Could find number!");
     }
 
     private static String findThree(Set<String> strings, String one, String four) {
@@ -139,7 +124,7 @@ public class Day8 {
                 return string;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Could find number!");
     }
 
     private static String findFive(Set<String> strings, String one, String four) {
@@ -153,7 +138,7 @@ public class Day8 {
                 return string;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Could find number!");
     }
 
     private static String findTwo(Set<String> strings, String one, String four) {
@@ -167,7 +152,7 @@ public class Day8 {
                 return string;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Could find number!");
     }
 
     private static Set<Character> getCharacters(String part) {
