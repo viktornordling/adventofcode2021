@@ -69,13 +69,13 @@ public class Day12 {
         }
         Set<String> ns = neighbors.get(current);
         for (String n : ns) {
-            if (!isSmallCave(n) || (isSmallCave(n) && smallCaveVisits(smallCaves, n) < 1) || (allowedDouble.equals(n) && smallCaveVisits(smallCaves, n) < 2)) {
+            int smallCaveVisits = smallCaveVisits(smallCaves, n);
+            if (!isSmallCave(n) || (isSmallCave(n) && smallCaveVisits < 1) || (allowedDouble.equals(n) && smallCaveVisits < 2)) {
                 List<String> newPath = new ArrayList<>(path);
                 newPath.add(n);
                 Map<String, Integer> newSmallCaves = new HashMap<>(smallCaves);
                 if (isSmallCave(n)) {
-                    Integer orDefault = newSmallCaves.getOrDefault(n, 0);
-                    newSmallCaves.put(n, orDefault + 1);
+                    newSmallCaves.put(n, smallCaveVisits + 1);
                 }
                 dfsB(neighbors, n, goal, newSmallCaves, newPath, allowedDouble);
             }
