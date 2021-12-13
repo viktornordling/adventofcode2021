@@ -1,9 +1,11 @@
 package aoc2021.util;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +13,25 @@ import java.util.Set;
 public class Util {
 
     public static void printGrid(Map<Point, Integer> points) {
+        int minX = points.keySet().stream().min(Comparator.comparingInt(o -> o.x)).get().x;
+        int maxX = points.keySet().stream().max(Comparator.comparingInt(o -> o.x)).get().x;
+        int minY = points.keySet().stream().min(Comparator.comparingInt(o -> o.y)).get().y;
+        int maxY = points.keySet().stream().max(Comparator.comparingInt(o -> o.y)).get().y;
+
+        for (int y = minY; y <= maxY; y++) {
+            for (int x = minX; x <= maxX; x++) {
+                Point key = new Point(x, y);
+                if (points.get(key) == null) {
+                    System.out.print(".");
+                } else {
+                    System.out.print(points.get(key));
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printMap(Map<Point, Character> points) {
         int minX = points.keySet().stream().min(Comparator.comparingInt(o -> o.x)).get().x;
         int maxX = points.keySet().stream().max(Comparator.comparingInt(o -> o.x)).get().x;
         int minY = points.keySet().stream().min(Comparator.comparingInt(o -> o.y)).get().y;
@@ -81,5 +102,14 @@ public class Util {
             throw new IllegalArgumentException("Size not 1: " + set.size());
         }
         return set.stream().findFirst().get();
+    }
+
+    public static List<Character> stringToCharacters(String part) {
+        byte[] bytes = part.getBytes(StandardCharsets.UTF_8);
+        List<Character> chars = new ArrayList<>();
+        for (byte bb : bytes) {
+            chars.add((char) bb);
+        }
+        return chars;
     }
 }
