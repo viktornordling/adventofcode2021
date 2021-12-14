@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Util {
 
@@ -111,5 +112,29 @@ public class Util {
             chars.add((char) bb);
         }
         return chars;
+    }
+
+    public static Map<Character, Long> charFreq(String string) {
+        Map<Character, Long> result = new HashMap<>();
+        for (Character c : stringToCharacters(string)) {
+            result.put(c, result.getOrDefault(c, 0L) + 1);
+        }
+        return result;
+    }
+
+    public static <T> T findMax(Map<T, Long> frequencies) {
+        if (frequencies.isEmpty()) {
+            throw new IllegalArgumentException("empty");
+        }
+        Long max = frequencies.values().stream().max(Comparator.naturalOrder()).get();
+        return frequencies.keySet().stream().filter(it -> Objects.equals(frequencies.get(it), max)).findFirst().get();
+    }
+
+    public static <T> T findMin(Map<T, Long> frequencies) {
+        if (frequencies.isEmpty()) {
+            throw new IllegalArgumentException("empty");
+        }
+        Long max = frequencies.values().stream().min(Comparator.naturalOrder()).get();
+        return frequencies.keySet().stream().filter(it -> Objects.equals(frequencies.get(it), max)).findFirst().get();
     }
 }
